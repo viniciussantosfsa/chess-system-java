@@ -27,4 +27,11 @@ public class Board {
         this.columms = columms;
     }
 
+    public Piece piece(int row, int columm) {
+        return pieces[row][columm];
+    }
+
+    public Piece piece(Position position) {
+        return pieces[position.getRow()][position.getColumm()];
+    }
 }
