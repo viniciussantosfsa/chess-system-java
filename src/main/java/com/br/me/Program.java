@@ -2,6 +2,7 @@ package com.br.me;
 
 import java.util.Scanner;
 
+import com.br.me.chess.ChessException;
 import com.br.me.chess.ChessMatch;
 import com.br.me.chess.ChessPiece;
 import com.br.me.chess.ChessPosition;
@@ -13,17 +14,23 @@ public class Program {
         ChessMatch chessMatch = new ChessMatch();
 
         while (true) {
-            UI.printBoard(chessMatch.getPieces());
-            System.out.println(); // skip 1 line :D
-            
-            System.out.print("Source: ");
-            ChessPosition source = UI.readChessPosition(sc);
+            try {
+                UI.clearScreen();
+                UI.printBoard(chessMatch.getPieces());
+                System.out.println(); // skip 1 line :D
 
-            System.out.println(); // skip 1 line
-            System.out.print("Target: ");
-            ChessPosition target = UI.readChessPosition(sc);
+                System.out.print("Source: ");
+                ChessPosition source = UI.readChessPosition(sc);
 
-            ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+                System.out.println(); // skip 1 line
+                System.out.print("Target: ");
+                ChessPosition target = UI.readChessPosition(sc);
+
+                ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+            } catch (ChessException e) {
+                System.out.println(e.getMessage());
+                sc.nextLine();
+            }
         }
     }
 }
